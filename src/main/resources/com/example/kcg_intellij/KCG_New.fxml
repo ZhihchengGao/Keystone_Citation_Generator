@@ -1,0 +1,612 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
+  All rights reserved. Use is subject to license terms.
+
+  This file is available and licensed under the following license:
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the distribution.
+  - Neither the name of Oracle Corporation nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.kcg_intellij.MainNewCitationController">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="573.0" prefWidth="860.0" VBox.vgrow="ALWAYS">
+         <children>
+            <VBox prefHeight="66.0" prefWidth="860.0" spacing="5.0" AnchorPane.topAnchor="10.0">
+               <children>
+                  <HBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="860.0" style="-fx-background-color: white;">
+                     <children>
+                        <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="854.0">
+                           <children>
+                              <Text layoutX="364.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="新建参考文献" textAlignment="CENTER" AnchorPane.topAnchor="3.0">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Text>
+                              <Button fx:id="btnConfirm" alignment="CENTER_RIGHT" layoutX="362.0" layoutY="-1.0" mnemonicParsing="false" onAction="#handleConfirm" text="确定" textAlignment="CENTER" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="1.0">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </HBox>
+                  <HBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="860.0" style="-fx-background-color: white;">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="文献类型:   ">
+                           <font>
+                              <Font size="21.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets top="3.0" />
+                           </HBox.margin>
+                        </Text>
+                        <MenuButton fx:id="mnubtnCitationType" mnemonicParsing="false" text="(请选择)">
+                          <items>
+                            <MenuItem mnemonicParsing="false" onAction="#handleSelectM" text="普通图书[M]" />
+                            <MenuItem mnemonicParsing="false" onAction="#handleSelectN" text="报纸[N]" />
+                              <MenuItem mnemonicParsing="false" onAction="#handleSelectJ" text="期刊[J]" />
+                              <MenuItem mnemonicParsing="false" onAction="#handleSelectD" text="论文[D]" />
+                              <MenuItem mnemonicParsing="false" onAction="#handleSelectR" text="调查报告[R]" />
+                              <MenuItem mnemonicParsing="false" onAction="#handleSelectEBOL" text="网页[EB/OL]" />
+                              <MenuItem mnemonicParsing="false" onAction="#handleSelectDBOL" text="数据库[DB/OL]" />
+                              <Menu mnemonicParsing="false" text="其他[Z]">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#handleSelectZ_Interview" text="采访[Z]" />
+                                    <MenuItem mnemonicParsing="false" onAction="#handleSelectZ_Wechat" text="微信公众号文章[Z/OL]" />
+                                    <MenuItem mnemonicParsing="false" onAction="#handleSelectZ_Forum" text="论坛帖子[Z/OL]" />
+                                 </items>
+                              </Menu>
+                          </items>
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </MenuButton>
+                     </children>
+                  </HBox>
+                  <HBox fx:id="areaMain" alignment="TOP_CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="265.0" prefWidth="860.0" style="-fx-background-color: white;">
+                     <children>
+                        <VBox prefHeight="204.0" prefWidth="393.0">
+                           <children>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="文献标题：">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Text>
+                                    <TextField fx:id="txtEnterTitle" prefHeight="26.0" prefWidth="253.0" promptText="在此输入文献标题">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="文献作者：">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Text>
+                                    <TextField fx:id="txtEnterAuthor" prefHeight="26.0" prefWidth="253.0" promptText="在此输入文献作者">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="发布/出版日期:">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Text>
+                                    <TextField fx:id="txtPublishYear" onAction="#handlePublishYear" prefHeight="26.0" prefWidth="52.0">
+                                       <HBox.margin>
+                                          <Insets left="12.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="年">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                    <TextField fx:id="txtPublishMonth" onAction="#handlePublishMonth" prefHeight="26.0" prefWidth="40.0">
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="月">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                    <TextField fx:id="txtPublishDay" onAction="#txtPublishDay" prefHeight="26.0" prefWidth="40.0">
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="日">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="引用/访问日期:">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Text>
+                                    <TextField fx:id="txtAccessedYear" onAction="#handleAccessedYear" prefHeight="26.0" prefWidth="52.0">
+                                       <HBox.margin>
+                                          <Insets left="12.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="年">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                    <TextField fx:id="txtAccessedMonth" onAction="#handleAccessedMonth" prefHeight="26.0" prefWidth="40.0">
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="月">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                    <TextField fx:id="txtAccessedDay" onAction="#handleAccessedDay" prefHeight="26.0" prefWidth="40.0">
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="日">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <HBox.margin>
+                              <Insets left="50.0" />
+                           </HBox.margin>
+                        </VBox>
+                        <VBox prefHeight="204.0" prefWidth="410.0">
+                           <children>
+                              <HBox alignment="TOP_CENTER" prefHeight="47.0" prefWidth="406.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="在线参考文献">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Text>
+                                    <CheckBox fx:id="checkOnline" mnemonicParsing="false" onAction="#handleOnline" prefHeight="28.0" prefWidth="103.0">
+                                       <font>
+                                          <Font size="19.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="12.0" />
+                                       </HBox.margin>
+                                    </CheckBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox prefHeight="66.0" prefWidth="406.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="出版社: ">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Text>
+                                    <TextField fx:id="txtEnterPublisher" prefHeight="26.0" prefWidth="237.0" promptText="在此输入出版社">
+                                       <HBox.margin>
+                                          <Insets left="12.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                                 <padding>
+                                    <Insets left="20.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox prefHeight="62.0" prefWidth="406.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="出版地: ">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Text>
+                                    <TextField fx:id="txtEnterPublishedPlace" prefHeight="26.0" prefWidth="237.0" promptText="在此输入出版地">
+                                       <HBox.margin>
+                                          <Insets left="12.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                                 <padding>
+                                    <Insets left="20.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox prefHeight="82.0" prefWidth="308.0">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="访问路径(URL):">
+                                             <font>
+                                                <Font size="17.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </Text>
+                                          <TextField fx:id="txtEnterURL" minHeight="-Infinity" prefHeight="26.0" prefWidth="219.0" promptText="在此输入URL">
+                                             <VBox.margin>
+                                                <Insets top="12.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <padding>
+                                    <Insets left="20.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                           <HBox.margin>
+                              <Insets left="15.0" />
+                           </HBox.margin>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <VBox fx:id="areaMNJ" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: white;">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="M/N/J 类型参考文献">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </HBox>
+                        <HBox alignment="TOP_CENTER" minHeight="-Infinity" prefHeight="180.0" prefWidth="860.0" style="-fx-background-color: white;">
+                           <children>
+                              <VBox prefHeight="204.0" prefWidth="391.0">
+                                 <children>
+                                    <HBox alignment="TOP_CENTER" prefHeight="33.0" prefWidth="388.0">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="可输入页码">
+                                             <font>
+                                                <Font size="17.0" />
+                                             </font>
+                                          </Text>
+                                          <CheckBox fx:id="checkHasPageNumber" mnemonicParsing="false" onAction="#handleHasPageNumber" prefHeight="28.0" prefWidth="28.0">
+                                             <HBox.margin>
+                                                <Insets left="12.0" />
+                                             </HBox.margin>
+                                          </CheckBox>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="40.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox alignment="TOP_CENTER" prefHeight="52.0" prefWidth="388.0">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="页码:">
+                                             <font>
+                                                <Font size="17.0" />
+                                             </font>
+                                          </Text>
+                                          <TextField fx:id="txtStartingPage" onAction="#handleStartingPage" prefHeight="26.0" prefWidth="109.0" promptText="起始页码">
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="至">
+                                             <font>
+                                                <Font size="17.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="5.0" />
+                                             </HBox.margin>
+                                          </Text>
+                                          <TextField fx:id="txtEndingPage" onAction="#handleEndingPage" prefHeight="26.0" prefWidth="109.0" promptText="终止页码">
+                                             <HBox.margin>
+                                                <Insets left="5.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="20.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="50.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox prefHeight="204.0" prefWidth="410.0">
+                                 <HBox.margin>
+                                    <Insets left="15.0" />
+                                 </HBox.margin>
+                                 <children>
+                                    <HBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="407.0">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="有其他作者">
+                                             <font>
+                                                <Font size="17.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                          </Text>
+                                          <CheckBox fx:id="checkHasOtherAuthor" mnemonicParsing="false" onAction="#handleHasOtherAuthor" prefHeight="26.0" prefWidth="26.0">
+                                             <font>
+                                                <Font size="19.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="12.0" />
+                                             </HBox.margin>
+                                          </CheckBox>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="30.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox prefHeight="66.0" prefWidth="406.0">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="其他作者名">
+                                             <font>
+                                                <Font size="17.0" />
+                                             </font>
+                                          </Text>
+                                          <TextField fx:id="txtOtherAuthor" onAction="#handleOtherAuthor" prefHeight="26.0" prefWidth="237.0" promptText="再次输入其他作者名">
+                                             <HBox.margin>
+                                                <Insets left="12.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets left="20.0" top="20.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox alignment="TOP_CENTER" prefHeight="228.0" prefWidth="407.0">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="第">
+                                             <font>
+                                                <Font size="17.0" />
+                                             </font>
+                                          </Text>
+                                          <TextField fx:id="txtVolumeNumber" onAction="#handleVolumeNumber" prefHeight="26.0" prefWidth="43.0" promptText="卷号">
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="卷,   ">
+                                             <font>
+                                                <Font size="17.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="5.0" />
+                                             </HBox.margin>
+                                          </Text>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="第">
+                                             <font>
+                                                <Font size="17.0" />
+                                             </font>
+                                          </Text>
+                                          <TextField fx:id="txtIssueNumber" onAction="#handleIssueNumber" prefHeight="26.0" prefWidth="42.0" promptText="期号">
+                                             <HBox.margin>
+                                                <Insets left="5.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="期">
+                                             <font>
+                                                <Font size="17.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="5.0" />
+                                             </HBox.margin>
+                                          </Text>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="20.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox fx:id="areaZ" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: white;">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="[采访]类型参考文献">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </HBox>
+                        <HBox alignment="TOP_CENTER" minHeight="-Infinity" prefHeight="176.0" prefWidth="860.0" style="-fx-background-color: white;">
+                           <children>
+                              <VBox prefHeight="204.0" prefWidth="410.0">
+                                 <HBox.margin>
+                                    <Insets left="15.0" />
+                                 </HBox.margin>
+                                 <children>
+                                    <HBox alignment="TOP_CENTER" prefHeight="66.0" prefWidth="406.0">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="采访人">
+                                             <font>
+                                                <Font size="17.0" />
+                                             </font>
+                                          </Text>
+                                          <TextField fx:id="txtInterviewer" onAction="#handleinterviewer" prefHeight="26.0" prefWidth="237.0" promptText="在此输入采访人名">
+                                             <HBox.margin>
+                                                <Insets left="12.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets left="20.0" top="20.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox alignment="TOP_CENTER" prefHeight="66.0" prefWidth="406.0">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="被采访人">
+                                             <font>
+                                                <Font size="17.0" />
+                                             </font>
+                                          </Text>
+                                          <TextField fx:id="txtInterviewee" onAction="#handleInterviewee" prefHeight="26.0" prefWidth="237.0" promptText="在此输入被采访人名">
+                                             <HBox.margin>
+                                                <Insets left="12.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets left="20.0" top="20.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox alignment="TOP_CENTER" prefHeight="71.0" prefWidth="410.0">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="采访日期:">
+                                             <font>
+                                                <Font size="17.0" />
+                                             </font>
+                                          </Text>
+                                          <TextField fx:id="txtInterviewYear" onAction="#handleInterviewYear" prefHeight="26.0" prefWidth="52.0">
+                                             <HBox.margin>
+                                                <Insets left="12.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="年">
+                                             <font>
+                                                <Font size="17.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="5.0" />
+                                             </HBox.margin>
+                                          </Text>
+                                          <TextField fx:id="txtInterviewMonth" onAction="#handleInterviewMonth" prefHeight="26.0" prefWidth="40.0">
+                                             <HBox.margin>
+                                                <Insets left="5.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="月">
+                                             <font>
+                                                <Font size="17.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="5.0" />
+                                             </HBox.margin>
+                                          </Text>
+                                          <TextField fx:id="txtInterviewDay" onAction="#handleInterviewDay" prefHeight="26.0" prefWidth="40.0">
+                                             <HBox.margin>
+                                                <Insets left="5.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="日">
+                                             <font>
+                                                <Font size="17.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="5.0" />
+                                             </HBox.margin>
+                                          </Text>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="20.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+    </AnchorPane>
+  </children>
+</VBox>
