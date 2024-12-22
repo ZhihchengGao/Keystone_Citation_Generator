@@ -6,7 +6,7 @@ This project can also be used as a framework for a general citation generator wi
 ### Development Information
 Designed and developed by Richard Gao | 高靖博
 
-Chinese character sorting realised by the Pinyin4j library
+Chinese character sorting realized by the Pinyin4j library
 
 Last update: December 20, 2024 (ver. 0.1.0)
 
