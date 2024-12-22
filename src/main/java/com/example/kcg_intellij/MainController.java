@@ -76,24 +76,15 @@ public class MainController {
 
     @FXML
     void handleViewReg(ActionEvent event) {
-
-    }
-
-    @FXML
-    void handleRefresh(ActionEvent event) {
-        Sorting_Code output = new Sorting_Code();
-        String citation_output = output.getSampleCitationOutput();
-        
-        // Debug print to verify output
-        System.out.println("Generated Citations:\n" + citation_output);
-        
-        // Update GUI
-        txtCitation.setText(citation_output);
     }
 
 
     @FXML
     void handleEditCitation(ActionEvent event) {
-
+        OpeningController open = new OpeningController();
+        // Pass the MainController instance to OpeningController
+        open.setMainController(this);
+        // Open the new citation window
+        open.openEditCitation();
     }
 }

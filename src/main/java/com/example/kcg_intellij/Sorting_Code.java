@@ -1,6 +1,7 @@
 package com.example.kcg_intellij;
 
 import java.util.ArrayList;
+import com.example.kcg_intellij.PinyinTranslator;
 
 import javax.print.DocFlavor.INPUT_STREAM;
 
@@ -21,72 +22,6 @@ public class Sorting_Code {
         return citationEntries;
     }
 
-    // SAMPLES ONLY FOR DEVELOPMENT PURPOSES
-    public void generateSample() {
-        Book book1 = new Book(
-                "Richard Gao",
-                true,
-                "Bessie Wang",
-                "Fundamental Theory of Touching Fish",
-                true,
-                "Beijing",
-                "Penguin Books",
-                2020,
-                5,
-                20,
-                "2024-11-08",
-                "https://example.com/");
-
-        Book book2 = new Book(
-                "David Cao",
-                true,
-                "Billy Song",
-                "Water Sweeping Principles",
-                false,
-                "Beijing",
-                "Penguin Books",
-                2024,
-                13,
-                82,
-                "2024-11-08",
-                " ");
-
-        Book book3 = new Book(
-                "Henry Ye",
-                false,
-                "",
-                "Fundamental Theory of Touching Fish",
-                false,
-                "Beijing",
-                "Penguin Books",
-                2024,
-                12,
-                64,
-                "2024-11-08",
-                "");
-
-        Book book4 = new Book(
-                "Realistic Zhang",
-                true,
-                "Gordon Zhang",
-                "Java Programming - from Hero to Zero",
-                true,
-                "Underground",
-                "null",
-                4202,
-                114,
-                514,
-                "1919-8-10",
-                "gordonzhang.wildbooks.com");
-
-        // Generate citations
-        citationEntries.add(generateBook(book1)); // add generated citation from previous generate book method
-        citationEntries.add(generateBook(book2)); // these are example citation entries
-        citationEntries.add(generateBook(book3));
-        citationEntries.add(generateBook(book4));
-        System.out.println("Sample Citations Generated: " + citationEntries);
-    }
-
     public void outputCitations(ArrayList<String> citations) { 
         citationEntries = bubbleSortCitations(citations); // Sort citations
         citationOutput.setLength(0);
@@ -97,13 +32,6 @@ public class Sorting_Code {
 
     public String getCitationOutput() {
         return citationOutput.toString();
-    }
-
-    public String getSampleCitationOutput() {
-        generateSample();
-        citationOutput.setLength(0);
-        outputCitations(citationEntries);
-        return getCitationOutput();
     }
 
     public String generateBook(Book bookEntry) {
@@ -131,11 +59,11 @@ public class Sorting_Code {
             if (bookEntry.hasOtherAuthor()) { // Check if there's another author
                 return author + "." + title + "[M]." + otherAuthor + "."
                         + publishedPlace + ":" + publisher + "," + startingPageNumber
-                        + "-" + endingPageNumber + "[" + accessingDate + "]" + ".";
+                        + "-" + endingPageNumber + '.';
             } else {
                 return author + "." + title + "[M]."
                         + publishedPlace + ":" + publisher + "," + startingPageNumber
-                        + "-" + endingPageNumber + "[" + accessingDate + "]" + ".";
+                        + "-" + endingPageNumber + '.';
             }
         }
     }
@@ -166,10 +94,10 @@ public class Sorting_Code {
             if (NewspaperEntry.isPageApplicable()) {
                 return author + "." + title + "[N]." + publisher + "," + publishedYear
                         + "," + volumeNumber + "(" + issueNumber + ")" + ":" + startingPageNumber
-                        + "-" + endingPageNumber + "[" + accessingDate + "]" + ".";
+                        + "-" + endingPageNumber + ".";
             } else {
                 return author + "." + title + "[N]." + publisher + "," + publishedYear
-                        + "," + volumeNumber + "(" + issueNumber + ")" + "[" + accessingDate + "]"
+                        + "," + volumeNumber + "(" + issueNumber + ")"
                         + ".";
             }
         }
@@ -201,10 +129,10 @@ public class Sorting_Code {
             if (JournalEntry.isPageApplicable()) {
                 return author + "." + title + "[J]." + publisher + "," + publishedYear
                         + "," + volumeNumber + "(" + issueNumber + ")" + ":" + startingPageNumber
-                        + "-" + endingPageNumber + "[" + accessingDate + "]" + ".";
+                        + "-" + endingPageNumber + ".";
             } else {
                 return author + "." + title + "[J]." + publisher + "," + publishedYear
-                        + "," + volumeNumber + "(" + issueNumber + ")" + "[" + accessingDate + "]"
+                        + "," + volumeNumber + "(" + issueNumber + ")"
                         + ".";
             }
         }
@@ -224,7 +152,7 @@ public class Sorting_Code {
                     + publishedYear + "[" + accessingDate + "]" + "." + url + ".";
         } else {
             return author + "." + title + "[D]" + publishedPlace + ":" + publisher + ","
-                    + publishedYear + "[" + accessingDate + "]" + ".";
+                    + publishedYear + ".";
         }
     }
 
@@ -262,7 +190,7 @@ public class Sorting_Code {
                     + interviewDate + "[" + accessingDate + "]." + url + ".";
         } else {
             return interviewee + "." + title + "[Z]." + interviewer + "." + publisher + ","
-                    + interviewDate + "[" + accessingDate + "].";
+                    + interviewDate + ".";
         }
     }
 
@@ -278,8 +206,7 @@ public class Sorting_Code {
             return author + "." + title + "[R/OL]." + publisher + "," + PublishedDate + "["
                     + accessingDate + "]." + url + ".";
         } else {
-            return author + "." + title + "[R]." + publisher + "," + PublishedDate + "["
-                    + accessingDate + "].";
+            return author + "." + title + "[R]." + publisher + "," + PublishedDate + ".";
         }
     }
 
@@ -287,7 +214,7 @@ public class Sorting_Code {
         int n = citations.size();
         for (int i = 0; i < n - 1; i++) {
             for (int j = 0; j < n - i - 1; j++) {
-                if (citations.get(j).compareToIgnoreCase(citations.get(j + 1)) > 0) {
+                if (PinyinTranslator.textToHanYuPinyin(citations.get(j)).compareToIgnoreCase(PinyinTranslator.textToHanYuPinyin(citations.get(j + 1))) > 0) {
                     // Swap citations[j] and citations[j+1]
                     String temp = citations.get(j);
                     citations.set(j, citations.get(j + 1));

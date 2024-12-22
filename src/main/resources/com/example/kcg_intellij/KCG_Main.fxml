@@ -31,11 +31,6 @@
                   <Cursor fx:constant="MOVE" />
                </cursor>
             </Button>
-            <Button fx:id="btnRefresh" mnemonicParsing="false" onAction="#handleRefresh" text="刷新">
-               <cursor>
-                  <Cursor fx:constant="MOVE" />
-               </cursor>
-            </Button>
          </children>
          <VBox.margin>
             <Insets />

@@ -864,14 +864,22 @@ public class MainNewCitationController {
             citation = generator.generateBook(tempBook);
 
         } else if (citationType.equals("N")) {
-            int startingPageNo = Integer.parseInt(txtStartingPage.getText());
-            int endingPageNo = Integer.parseInt(txtEndingPage.getText());
+            int startingPageNo = 0;
+            int endingPageNo = 0;
             int volumeNo = Integer.parseInt(txtVolumeNumber.getText());
             int issueNo = Integer.parseInt(txtIssueNumber.getText());
             if (checkOnline.isSelected()) {
                 online = true;
             } else {
                 online = false;
+            }
+
+            if (checkHasPageNumber.isSelected()) {
+                page = true;
+                startingPageNo = Integer.parseInt(txtStartingPage.getText());
+                endingPageNo = Integer.parseInt(txtEndingPage.getText());
+            } else {
+                page = false;
             }
 
             Newspaper tempNews = new Newspaper(
@@ -892,14 +900,22 @@ public class MainNewCitationController {
             citation = generator.generateNewspaper(tempNews);
 
         } else if (citationType.equals("J")) {
-            int startingPageNo = Integer.parseInt(txtStartingPage.getText());
-            int endingPageNo = Integer.parseInt(txtEndingPage.getText());
+            int startingPageNo = 0;
+            int endingPageNo = 0;
             int volumeNo = Integer.parseInt(txtVolumeNumber.getText());
             int issueNo = Integer.parseInt(txtIssueNumber.getText());
             if (checkOnline.isSelected()) {
                 online = true;
             } else {
                 online = false;
+            }
+
+            if (checkHasPageNumber.isSelected()) {
+                page = true;
+                startingPageNo = Integer.parseInt(txtStartingPage.getText());
+                endingPageNo = Integer.parseInt(txtEndingPage.getText());
+            } else {
+                page = false;
             }
 
             Journal tempJournal = new Journal(
@@ -959,11 +975,6 @@ public class MainNewCitationController {
             citation = generator.generateReport(tempReport);
 
         } else if (citationType.equals("DBOL")) {
-            if (checkOnline.isSelected()) {
-                online = true;
-            } else {
-                online = false;
-            }
 
             OnlineSources tempDB = new OnlineSources(
                     txtEnterAuthor.getText(),
@@ -978,11 +989,6 @@ public class MainNewCitationController {
             citation = generator.generateOnlineSources(tempDB);
 
         } else if (citationType.equals("EBOL")) {
-            if (checkOnline.isSelected()) {
-                online = true;
-            } else {
-                online = false;
-            }
 
             OnlineSources tempEB = new OnlineSources(
                     txtEnterAuthor.getText(),
@@ -1030,11 +1036,6 @@ public class MainNewCitationController {
             citation = generator.generateInterview(tempZI);
 
         } else if (citationType.equals("ZW")) {
-            if (checkOnline.isSelected()) {
-                online = true;
-            } else {
-                online = false;
-            }
 
             OnlineSources tempZW = new OnlineSources(
                     txtEnterAuthor.getText(),
