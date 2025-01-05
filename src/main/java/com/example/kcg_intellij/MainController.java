@@ -16,6 +16,11 @@ import javafx.scene.control.TextArea;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class MainController {
 
@@ -35,17 +40,34 @@ public class MainController {
     private TextArea txtCitation;
 
     @FXML
-    private Button btnRefresh;
-
-    @FXML
     private Button btnEditCitation;
-    
-    private Sorting_Code sortingCode = new Sorting_Code(); // Maintain citations
+
+    @FXML Button btnAbout;
+
+
+    private Sorting_Code sortingCode;
+    public void setSortingCode(Sorting_Code sortingCode) {this.sortingCode = sortingCode;}
 
     public void addNewCitation(String newCitation) {
+        setSortingCode(Sorting_Code.getSortingCode());
         sortingCode.getCitationEntries().add(newCitation);
         sortingCode.outputCitations(sortingCode.getCitationEntries());
         txtCitation.setText(sortingCode.getCitationOutput()); // Update the display
+    }
+
+
+    public void deleteCitation(ArrayList<Integer> indexes){
+        setSortingCode(Sorting_Code.getSortingCode());
+        ArrayList<Integer> citationIndexes = new ArrayList<>();
+        citationIndexes = indexes;
+        Collections.sort(citationIndexes, Collections.reverseOrder());
+        for (int i = 0, j = citationIndexes.size(); i < j; i++) {
+            System.out.print(i);
+            int removeno = citationIndexes.get(i);
+            sortingCode.getCitationEntries().remove(removeno-1);
+        }
+        sortingCode.outputCitations(sortingCode.getCitationEntries());
+        txtCitation.setText(sortingCode.getCitationOutput());;
     }
 
     @FXML
@@ -75,16 +97,26 @@ public class MainController {
     }
 
     @FXML
-    void handleViewReg(ActionEvent event) {
-    }
-
-
-    @FXML
     void handleEditCitation(ActionEvent event) {
         OpeningController open = new OpeningController();
         // Pass the MainController instance to OpeningController
         open.setMainController(this);
         // Open the new citation window
         open.openEditCitation();
+    }
+
+
+    @FXML
+    void handleAbout(ActionEvent event) {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setHeaderText("鼎石中文参考文献生成器");
+        alert.setContentText("开发者: Richard Gao | 高靖博 \n当前版本：v0.9 \n \n开源地址:\n github.com/ZhihchengGao/Keystone_Citation_Generator \n \n如有问题，请联系：richardgao2006@gmail.com");
+        alert.setTitle("鼎石参考文献生成器");
+        alert.showAndWait();
+    }
+
+    @FXML
+    void handlemnuRefreg(ActionEvent event) throws URISyntaxException, IOException {
+        Desktop.getDesktop().browse(new URI("https://github.com/ZhihchengGao/Keystone_Citation_Generator/wiki/User-Guide"));
     }
 }

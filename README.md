@@ -6,6 +6,12 @@ This project can also be used as a framework for a general citation generator wi
 ### Development Information
 Designed and developed by Richard Gao | 高靖博
 
-Last update: December 20, 2024 (ver. 0.1.0)
+_Special Thanks: Gordon Zhang, Mr. Kyaw (Pete)_
 
-Special Thanks: Gordon Zhang, Mr. Kyaw (Pete)
+### Current Version:
+**January 5, 2025 - v0.9**
+- Enabling users to manually delete citations
+- Added _about info_ of the project in the generator
+- Added Keystone citation regulation in the generator
+- Numbered and alphabetical output of Chinese citations, as per regulation required
+- Bugfixes

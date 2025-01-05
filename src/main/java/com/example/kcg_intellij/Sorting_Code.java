@@ -1,6 +1,8 @@
 package com.example.kcg_intellij;
 
 import java.util.ArrayList;
+import java.util.Collections;
+
 import com.example.kcg_intellij.PinyinTranslator;
 
 import javax.print.DocFlavor.INPUT_STREAM;
@@ -10,25 +12,32 @@ public class Sorting_Code {
     public StringBuilder citationOutput = new StringBuilder();
 
     // Private ArrayList to store citation entries
-    private ArrayList<String> citationEntries;
+    ArrayList<String> citationEntries;
 
     // Constructor to initialize the ArrayList
-    public Sorting_Code() {
+    private Sorting_Code() {
         citationEntries = new ArrayList<>();
+    }
+    private static Sorting_Code sortingCode = new Sorting_Code();
+
+    public static Sorting_Code getSortingCode() {
+        return sortingCode;
     }
 
     // Getter method that allows access to the ArrayList
     public ArrayList<String> getCitationEntries() {
-        return citationEntries;
+        return bubbleSortCitations(citationEntries);
     }
 
     public void outputCitations(ArrayList<String> citations) { 
         citationEntries = bubbleSortCitations(citations); // Sort citations
         citationOutput.setLength(0);
+        int i = 1;
         for (String entry : citationEntries) { // Output each sorted citation
-            citationOutput.append(entry).append("\n\n");
+            citationOutput.append("["+ i +"] ").append(entry).append("\n\n");
+            i ++;
         }
-    }   
+    }
 
     public String getCitationOutput() {
         return citationOutput.toString();
@@ -164,10 +173,10 @@ public class Sorting_Code {
         String accessingDate = OnlineSourcesEntry.getAccessingDate();
         String url = OnlineSourcesEntry.getUrl();
 
-        if (OnlineSourcesEntry.getSourceType() == "EB") {
+        if (OnlineSourcesEntry.getSourceType().equals("EB")) {
             return author + "." + title + "[EB/OL]." + publisher + ",("
                     + publishedDate + ")" + "[" + accessingDate + "]" + "." + url + ".";
-        } else if (OnlineSourcesEntry.getSourceType() == "DB") {
+        } else if (OnlineSourcesEntry.getSourceType().equals("DB")) {
             return author + "." + title + "[DB/OL]." + publisher + ",("
                     + publishedDate + ")" + "[" + accessingDate + "]" + "." + url + ".";
         } else {

@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -21,12 +20,22 @@
                   <Cursor fx:constant="MOVE" />
                </cursor>
             </Button>
-            <Button fx:id="btnEditCitation" mnemonicParsing="false" onAction="#handleEditCitation" style="-fx-background-color: white;" text="编辑参考文献">
+            <Button fx:id="btnEditCitation" mnemonicParsing="false" onAction="#handleEditCitation" style="-fx-background-color: white;" text="删除参考文献">
                <cursor>
                   <Cursor fx:constant="MOVE" />
                </cursor>
             </Button>
             <Button fx:id="btnDownloadCitation" mnemonicParsing="false" onAction="#handleDownloadCitation" style="-fx-background-color: white;" text="复制参考文献">
+               <cursor>
+                  <Cursor fx:constant="MOVE" />
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#handlemnuRefreg" style="-fx-background-color: white;" text="查看规范文件">
+               <cursor>
+                  <Cursor fx:constant="MOVE" />
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#handleAbout" style="-fx-background-color: white;" text="关于本生成器">
                <cursor>
                   <Cursor fx:constant="MOVE" />
                </cursor>
@@ -44,19 +53,10 @@
       </HBox>
     <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="623.0" prefWidth="1004.0" VBox.vgrow="ALWAYS">
          <children>
-            <HBox alignment="TOP_CENTER" layoutX="396.0" layoutY="22.0" prefHeight="38.0" prefWidth="212.0" AnchorPane.leftAnchor="396.0" AnchorPane.rightAnchor="396.0">
+            <HBox alignment="TOP_CENTER" layoutX="396.0" layoutY="22.0" prefHeight="38.0" prefWidth="212.0" AnchorPane.leftAnchor="396.0" AnchorPane.rightAnchor="396.0" />
+            <AnchorPane layoutX="128.0" layoutY="37.0" prefHeight="586.0" prefWidth="716.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="144.0" AnchorPane.rightAnchor="144.0" AnchorPane.topAnchor="37.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="项目: ">
-                     <font>
-                        <Font size="21.0" />
-                     </font>
-                  </Text>
-                  <ComboBox fx:id="boxProjectSelection" onAction="#handleProjectSelection" prefHeight="26.0" prefWidth="85.0" />
-               </children>
-            </HBox>
-            <AnchorPane layoutX="128.0" layoutY="72.0" prefHeight="728.0" prefWidth="912.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="144.0" AnchorPane.rightAnchor="144.0" AnchorPane.topAnchor="72.0">
-               <children>
-                  <VBox prefHeight="728.0" prefWidth="912.0" style="-fx-background-color: white; -fx-border-width: 1px; -fx-border-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <VBox layoutY="-28.0" prefHeight="579.0" prefWidth="716.0" style="-fx-background-color: white; -fx-border-width: 1px; -fx-border-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                   <TextArea fx:id="txtCitation" editable="false" layoutX="39.0" layoutY="39.0" prefHeight="658.0" prefWidth="835.0" promptText="当你添加参考文献后，它会显示在这里" wrapText="true" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="39.0" AnchorPane.rightAnchor="39.0" AnchorPane.topAnchor="69.0">
                      <font>
                         <Font size="20.0" />
@@ -73,11 +73,6 @@
                   </VBox>
                </children>
             </AnchorPane>
-            <Button fx:id="btnViewReg" alignment="BOTTOM_RIGHT" layoutX="1071.0" layoutY="751.5" mnemonicParsing="false" onAction="#handleViewReg" text="查看规范文件" AnchorPane.bottomAnchor="17.5" AnchorPane.rightAnchor="12.0">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Button>
          </children>
     </AnchorPane>
   </children>

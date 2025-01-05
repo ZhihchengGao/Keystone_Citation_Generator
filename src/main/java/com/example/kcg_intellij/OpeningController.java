@@ -36,7 +36,7 @@ public class OpeningController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("KCG_Edit.fxml"));
             Parent root = loader.load();
             // Get the MainNewCitationController instance
-            MainNewCitationController controller = loader.getController();
+            MainEditCitationController controller = loader.getController();
             // Pass the MainController instance to the MainNewCitationController
             controller.setMainController(mainController);
             // Open the new citation window in a new Stage

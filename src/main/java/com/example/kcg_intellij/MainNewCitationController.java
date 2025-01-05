@@ -262,7 +262,7 @@ public class MainNewCitationController {
         txtAccessedMonth.setDisable(false);
         txtAccessedYear.setDisable(false);
         txtAccessedDay.setDisable(false);
-        txtEnterURL.setDisable(true);
+        txtEnterURL.setDisable(false);
     }
 
     @FXML
@@ -272,7 +272,7 @@ public class MainNewCitationController {
         areaMNJ.setVisible(false);
         areaZ.setVisible(false);
         areaMain.setVisible(true);
-        mnubtnCitationType.setText("数据库网页[EB/OL]");
+        mnubtnCitationType.setText("网页[EB/OL]");
 
         checkHasOtherAuthor.setDisable(false);
         checkHasPageNumber.setDisable(false);
@@ -288,7 +288,7 @@ public class MainNewCitationController {
         txtAccessedMonth.setDisable(false);
         txtAccessedYear.setDisable(false);
         txtAccessedDay.setDisable(false);
-        txtEnterURL.setDisable(true);
+        txtEnterURL.setDisable(false);
     }
 
     @FXML
@@ -597,7 +597,7 @@ public class MainNewCitationController {
         txtAccessedMonth.setDisable(false);
         txtAccessedYear.setDisable(false);
         txtAccessedDay.setDisable(false);
-        txtEnterURL.setDisable(true);
+        txtEnterURL.setDisable(false);
     }
 
     @FXML
@@ -672,7 +672,7 @@ public class MainNewCitationController {
         txtAccessedMonth.setDisable(false);
         txtAccessedYear.setDisable(false);
         txtAccessedDay.setDisable(false);
-        txtEnterURL.setDisable(true);
+        txtEnterURL.setDisable(false);
     }
 
 
@@ -781,7 +781,7 @@ public class MainNewCitationController {
             
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
-            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+            Alert errorAlert = new Alert(Alert.AlertType.INFORMATION);
             errorAlert.setTitle("Input Errors");
             errorAlert.setHeaderText("Please correct the following errors:");
             errorAlert.setContentText(e.getMessage());
@@ -818,11 +818,18 @@ public class MainNewCitationController {
     }
 
     private String generateCitation() {
+
         boolean otherAuthor;
         boolean online;
         boolean page = true;
         String citation = null;
-        int publishedYearNo = Integer.parseInt(txtPublishYear.getText());
+
+        int publishedYearNo;
+        try {
+            publishedYearNo = Integer.parseInt(txtPublishYear.getText());
+        }catch (Exception e) {
+            publishedYearNo = 0;
+        }
         
         String accessedDate = txtAccessedYear.getText() + '-' + txtAccessedMonth.getText() + '-'
                 + txtAccessedDay.getText();
@@ -860,7 +867,7 @@ public class MainNewCitationController {
                     accessedDate,
                     txtEnterURL.getText());
 
-            Sorting_Code generator = new Sorting_Code();
+            Sorting_Code generator = Sorting_Code.getSortingCode();
             citation = generator.generateBook(tempBook);
 
         } else if (citationType.equals("N")) {
@@ -896,7 +903,7 @@ public class MainNewCitationController {
                     accessedDate,
                     txtEnterURL.getText());
 
-            Sorting_Code generator = new Sorting_Code();
+            Sorting_Code generator = Sorting_Code.getSortingCode();
             citation = generator.generateNewspaper(tempNews);
 
         } else if (citationType.equals("J")) {
@@ -932,7 +939,7 @@ public class MainNewCitationController {
                     accessedDate,
                     txtEnterURL.getText());
 
-            Sorting_Code generator = new Sorting_Code();
+            Sorting_Code generator = Sorting_Code.getSortingCode();
             citation = generator.generateJournal(tempJournal);
 
         } else if (citationType.equals("D")) {
@@ -952,7 +959,7 @@ public class MainNewCitationController {
                     accessedDate,
                     txtEnterURL.getText());
 
-            Sorting_Code generator = new Sorting_Code();
+            Sorting_Code generator = Sorting_Code.getSortingCode();
             citation = generator.generateArticle(tempArticle);
 
         } else if (citationType.equals("R")) {
@@ -971,7 +978,7 @@ public class MainNewCitationController {
                     accessedDate,
                     txtEnterURL.getText());
 
-            Sorting_Code generator = new Sorting_Code();
+            Sorting_Code generator = Sorting_Code.getSortingCode();
             citation = generator.generateReport(tempReport);
 
         } else if (citationType.equals("DBOL")) {
@@ -985,7 +992,7 @@ public class MainNewCitationController {
                     accessedDate,
                     txtEnterURL.getText());
 
-            Sorting_Code generator = new Sorting_Code();
+            Sorting_Code generator = Sorting_Code.getSortingCode();
             citation = generator.generateOnlineSources(tempDB);
 
         } else if (citationType.equals("EBOL")) {
@@ -999,7 +1006,7 @@ public class MainNewCitationController {
                     accessedDate,
                     txtEnterURL.getText());
 
-            Sorting_Code generator = new Sorting_Code();
+            Sorting_Code generator = Sorting_Code.getSortingCode();
             citation = generator.generateOnlineSources(tempEB);
 
         } else if (citationType.equals("ZF")) {
@@ -1012,7 +1019,7 @@ public class MainNewCitationController {
                     accessedDate,
                     txtEnterURL.getText());
 
-            Sorting_Code generator = new Sorting_Code();
+            Sorting_Code generator = Sorting_Code.getSortingCode();
             citation = generator.generateOnlineSources(tempZI);
 
         } else if (citationType.equals("ZI")) {
@@ -1032,7 +1039,7 @@ public class MainNewCitationController {
                     accessedDate,
                     txtEnterURL.getText());
 
-            Sorting_Code generator = new Sorting_Code();
+            Sorting_Code generator = Sorting_Code.getSortingCode();
             citation = generator.generateInterview(tempZI);
 
         } else if (citationType.equals("ZW")) {
@@ -1046,7 +1053,7 @@ public class MainNewCitationController {
                     accessedDate,
                     txtEnterURL.getText());
 
-            Sorting_Code generator = new Sorting_Code();
+            Sorting_Code generator = Sorting_Code.getSortingCode();
             citation = generator.generateOnlineSources(tempZW);
         }
 
