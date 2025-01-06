@@ -1,15 +1,15 @@
 package com.example.kcg_intellij;
 
-// *Class representing a Article entry. This is one type of citation entry.
+// *Class representing an Article entry. This is one type of citation entry.
 public class Article {
 
-    // Attributes to store basic information for a Article entry.
+    // Attributes to store basic information for an Article entry.
     private String author; // Primary author of the article.
     private String title; // Title of the Article.
     private boolean online; // T/F indicating if the article is online (true) or offline (false).
-    private String publishedPlace; // place of publishment
+    private String publishedPlace; // place of publish
     private String publisher; // Publisher of the Article.
-    private int publishedYear; // Year of publishment
+    private int publishedYear; // Year of publish
     private String accessingDate; // Date of access for Article.
     private String url; // URL of the online article, if any.
 
@@ -49,7 +49,7 @@ public class Article {
 
     public String getUrl() {
         return url;
-    } // Retrieve URL for online articlepaper.
+    } // Retrieve URL for online article.
 
     public String getAccessingDate() {
         return accessingDate;

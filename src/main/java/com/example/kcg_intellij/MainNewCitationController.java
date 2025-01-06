@@ -8,6 +8,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.Alert;
+
+import java.io.IOException;
 import java.util.List;
 import java.util.function.DoubleBinaryOperator;
 import javafx.stage.Stage;
@@ -113,6 +115,7 @@ public class MainNewCitationController {
     private String citationType = null;
     
     private MainController mainController; // Reference to the main controller
+    private ActionEvent event;
 
     // Setter method to receive the main controller
     public void setMainController(MainController mainController) {
@@ -293,6 +296,7 @@ public class MainNewCitationController {
 
     @FXML
     void handleSelectJ(ActionEvent event) {
+        this.event = event;
         citationType = "J";
         btnConfirm.setDisable(false);
         areaMNJ.setVisible(true);
@@ -468,7 +472,7 @@ public class MainNewCitationController {
         areaMain.setVisible(true);
         mnubtnCitationType.setText("报纸[N]"); // Set the menu button to show selected type
 
-        // Basic attibutes that needs to be shown for 'NEWS' entry
+        // Basic attributes that needs to be shown for 'NEWS' entry
         checkOnline.setSelected(false);
         checkHasOtherAuthor.setSelected(false);
         checkHasOtherAuthor.setDisable(true);
@@ -491,7 +495,7 @@ public class MainNewCitationController {
         txtVolumeNumber.setDisable(false);
         txtIssueNumber.setDisable(false);
 
-        // Listener to activly check if the checkbox is selected or not
+        // Listener to actively check if the checkbox is selected or not
         checkOnline.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) { // Check if 'Online' is selected => show attributes for online sources
                 txtAccessedMonth.setDisable(false);
@@ -507,18 +511,18 @@ public class MainNewCitationController {
                 citation_isOnline = false;
             }
         });
-        // Listener to activly check if the checkbox is selected or not
+        // Listener to actively check if the checkbox is selected or not
         checkHasOtherAuthor.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) { // Check if 'Has another author' is selected => show attributes for online
                             // sources
                 txtOtherAuthor.setDisable(false);
                 citation_hasOtherAuthor = true;
-            } else { // Has another author' is not selected => show attributes for online sources
+            } else { // Has another author is not selected => show attributes for online sources
                 txtOtherAuthor.setDisable(true);
                 citation_hasOtherAuthor = false;
             }
         });
-        // Listener to activly check if the checkbox is selected or not
+        // Listener to actively check if the checkbox is selected or not
         checkHasPageNumber.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) { // Check if 'has page number' is selected => show attributes for online sources
                 txtStartingPage.setDisable(false);
@@ -767,7 +771,6 @@ public class MainNewCitationController {
             }
 
             // If no errors, proceed with the next steps
-            System.out.println("All fields are valid!");
             // Generate citation
             String newCitation = generateCitation();
 
@@ -780,12 +783,13 @@ public class MainNewCitationController {
             ((Stage) txtEnterTitle.getScene().getWindow()).close();
             
         } catch (IllegalArgumentException e) {
-            e.printStackTrace();
             Alert errorAlert = new Alert(Alert.AlertType.INFORMATION);
             errorAlert.setTitle("Input Errors");
             errorAlert.setHeaderText("Please correct the following errors:");
             errorAlert.setContentText(e.getMessage());
             errorAlert.showAndWait();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 

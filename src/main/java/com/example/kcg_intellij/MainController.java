@@ -1,22 +1,17 @@
 package com.example.kcg_intellij;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.util.Duration;
-import javafx.application.Platform;
 import javafx.scene.control.Alert;
-import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Menu;
 import javafx.scene.control.TextArea;
+import javafx.stage.Modality;
 
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
-import java.io.IOException;
+import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -25,50 +20,74 @@ import java.util.Collections;
 public class MainController {
 
     @FXML
-    private ComboBox<?> boxProjectSelection;
-
-    @FXML
-    private Button btnViewReg;
-
-    @FXML
-    private Button btnDownloadCitation;
-
-    @FXML
-    private Button btnNewCitation;
-
-    @FXML
     private TextArea txtCitation;
 
-    @FXML
-    private Button btnEditCitation;
-
-    @FXML Button btnAbout;
-
-
     private Sorting_Code sortingCode;
+
     public void setSortingCode(Sorting_Code sortingCode) {this.sortingCode = sortingCode;}
 
-    public void addNewCitation(String newCitation) {
+    @FXML
+    public void initialize() throws IOException {
+        if (sortingCode == null) {
+            sortingCode = Sorting_Code.getSortingCode(); // Ensure it's initialized
+        }
+        retreiveStorage();
+    }
+
+    public void addNewCitation(String newCitation) throws IOException {
         setSortingCode(Sorting_Code.getSortingCode());
         sortingCode.getCitationEntries().add(newCitation);
         sortingCode.outputCitations(sortingCode.getCitationEntries());
         txtCitation.setText(sortingCode.getCitationOutput()); // Update the display
+        updateStorage();
     }
 
-
-    public void deleteCitation(ArrayList<Integer> indexes){
+    public void deleteCitation(ArrayList<Integer> indexes) throws IOException {
         setSortingCode(Sorting_Code.getSortingCode());
         ArrayList<Integer> citationIndexes = new ArrayList<>();
         citationIndexes = indexes;
         Collections.sort(citationIndexes, Collections.reverseOrder());
         for (int i = 0, j = citationIndexes.size(); i < j; i++) {
-            System.out.print(i);
             int removeno = citationIndexes.get(i);
             sortingCode.getCitationEntries().remove(removeno-1);
         }
         sortingCode.outputCitations(sortingCode.getCitationEntries());
-        txtCitation.setText(sortingCode.getCitationOutput());;
+        txtCitation.setText(sortingCode.getCitationOutput());
+        updateStorage();
     }
+
+    public void updateStorage() throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter("storage.txt"));
+        for(String entries : sortingCode.getCitationEntries()){
+            writer.write(entries + "\n");
+        }
+        writer.close();
+    }
+
+    public void retreiveStorage() throws IOException {
+        boolean retreived = false;
+        BufferedReader reader = new BufferedReader(new FileReader("storage.txt"));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            sortingCode.getCitationEntries().add(line);
+            retreived = true;
+        }
+        sortingCode.outputCitations(sortingCode.getCitationEntries());
+        txtCitation.setText(sortingCode.getCitationOutput());
+        reader.close();
+
+        if (retreived) {
+            Platform.runLater(() -> {
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Citation Retrieved");
+                alert.setHeaderText(null);
+                alert.setContentText("We retrieved the citation entries from the storage.");
+                alert.initModality(Modality.APPLICATION_MODAL); // Ensures it stays on top
+                alert.showAndWait();
+            });
+        }
+    }
+
 
     @FXML
     void handleDownloadCitation(ActionEvent event) {
@@ -92,11 +111,6 @@ public class MainController {
     }
 
     @FXML
-    void handleProjectSelection(ActionEvent event) {
-
-    }
-
-    @FXML
     void handleEditCitation(ActionEvent event) {
         OpeningController open = new OpeningController();
         // Pass the MainController instance to OpeningController
@@ -110,7 +124,7 @@ public class MainController {
     void handleAbout(ActionEvent event) {
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setHeaderText("鼎石中文参考文献生成器");
-        alert.setContentText("开发者: Richard Gao | 高靖博 \n当前版本：v0.9 \n \n开源地址:\n github.com/ZhihchengGao/Keystone_Citation_Generator \n \n如有问题，请联系：richardgao2006@gmail.com");
+        alert.setContentText("开发者: Richard Gao | 高靖博 \n当前版本：v1.0rc1 \n \n开源地址:\n github.com/ZhihchengGao/Keystone_Citation_Generator \n \n如有问题，请联系：richardgao2006@gmail.com");
         alert.setTitle("鼎石参考文献生成器");
         alert.showAndWait();
     }

@@ -9,9 +9,7 @@ Designed and developed by Richard Gao | 高靖博
 _Special Thanks: Gordon Zhang, Mr. Kyaw (Pete)_
 
 ### Current Version:
-**January 5, 2025 - v0.9**
-- Enabling users to manually delete citations
-- Added _about info_ of the project in the generator
-- Added Keystone citation regulation in the generator
-- Numbered and alphabetical output of Chinese citations, as per regulation required
+**January 6, 2025 - v1.0rc1**
+- Adding offline storage of citation entries
+- Automatic retrieving/storing citations to non volatile storage
 - Bugfixes

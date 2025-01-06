@@ -10,6 +10,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,7 +43,7 @@ public class MainEditCitationController implements Initializable {
     public void setSortingcode(Sorting_Code sortingCode) {this.sortingCode = sortingCode;}
 
     @FXML
-    void handleConfirm(ActionEvent event) {
+    void handleConfirm(ActionEvent event) throws IOException {
         if (mainController != null) {
             mainController.deleteCitation(getDeletedCitationNo());
         }
