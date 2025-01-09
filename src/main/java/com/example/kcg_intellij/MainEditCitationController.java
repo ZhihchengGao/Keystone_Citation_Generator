@@ -11,9 +11,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class MainEditCitationController implements Initializable {
@@ -34,16 +34,11 @@ public class MainEditCitationController implements Initializable {
         tableCitationTable.getItems().removeAll(tableCitationTable.getSelectionModel().getSelectedItems());
     }
 
-    @FXML
-    void handleEditThisCitation(ActionEvent event) {
-
-    }
-
     private Sorting_Code sortingCode;
     public void setSortingcode(Sorting_Code sortingCode) {this.sortingCode = sortingCode;}
 
     @FXML
-    void handleConfirm(ActionEvent event) throws IOException {
+    void handleConfirm(ActionEvent event) throws IOException, URISyntaxException {
         if (mainController != null) {
             mainController.deleteCitation(getDeletedCitationNo());
         }
@@ -52,8 +47,6 @@ public class MainEditCitationController implements Initializable {
 
     // ObservableList to back the TableView
     private final ObservableList<TableView_Citations> List = FXCollections.observableArrayList();
-
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -79,7 +72,6 @@ public class MainEditCitationController implements Initializable {
             Citations[i-1][1] = tableCitationTable.getItems().get(i-1);
             i++;
         }
-        System.out.println(Arrays.deepToString(Citations));
     }
 
     private MainController mainController; // Reference to the main controller
@@ -99,7 +91,6 @@ public class MainEditCitationController implements Initializable {
             }
         }
         deletedCitationNo.add((Integer) Citations[tempCode][0]);
-        System.out.println(deletedCitationNo);
     }
 
     public ArrayList<Integer> getDeletedCitationNo() {

@@ -34,7 +34,7 @@ public class MainController {
         retreiveStorage();
     }
 
-    public void addNewCitation(String newCitation) throws IOException {
+    public void addNewCitation(String newCitation) throws IOException, URISyntaxException {
         setSortingCode(Sorting_Code.getSortingCode());
         sortingCode.getCitationEntries().add(newCitation);
         sortingCode.outputCitations(sortingCode.getCitationEntries());
@@ -42,7 +42,7 @@ public class MainController {
         updateStorage();
     }
 
-    public void deleteCitation(ArrayList<Integer> indexes) throws IOException {
+    public void deleteCitation(ArrayList<Integer> indexes) throws IOException, URISyntaxException {
         setSortingCode(Sorting_Code.getSortingCode());
         ArrayList<Integer> citationIndexes = new ArrayList<>();
         citationIndexes = indexes;
@@ -56,37 +56,81 @@ public class MainController {
         updateStorage();
     }
 
-    public void updateStorage() throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter("storage.txt"));
-        for(String entries : sortingCode.getCitationEntries()){
+    /**
+     * Updates the storage file with the sorted list of citation entries.
+     * The citations are written to a file named "DO NOT DELETE KCG storage.txt"
+     * located in the user's home directory.
+     */
+    public void updateStorage() throws IOException, URISyntaxException {
+        // Define the path to the storage file in the user's home directory.
+        File storageFile = new File(System.getProperty("user.home"), "DO NOT DELETE KCG storage.txt");
+
+        // Create a BufferedWriter for writing to the file.
+        BufferedWriter writer = new BufferedWriter(new FileWriter(storageFile));
+
+        // Check if the file doesn't exist and create it if necessary.
+        if (!storageFile.exists()) {
+            storageFile.createNewFile();
+        }
+
+        // Iterate through the sorted citation entries and write each to the file.
+        for (String entries : sortingCode.getCitationEntries()) {
             writer.write(entries + "\n");
         }
+
+        // Close the BufferedWriter to release system resources.
         writer.close();
     }
 
+    /**
+     * Retrieves citation entries from the storage file.
+     * Reads citations from "DO NOT DELETE KCG storage.txt" in the user's home directory.
+     * Updates the internal storage and outputs the citations.
+     */
     public void retreiveStorage() throws IOException {
-        boolean retreived = false;
-        BufferedReader reader = new BufferedReader(new FileReader("storage.txt"));
-        String line;
-        while ((line = reader.readLine()) != null) {
-            sortingCode.getCitationEntries().add(line);
-            retreived = true;
-        }
-        sortingCode.outputCitations(sortingCode.getCitationEntries());
-        txtCitation.setText(sortingCode.getCitationOutput());
-        reader.close();
+        // Define the path to the storage file in the user's home directory.
+        File storageFile = new File(System.getProperty("user.home"), "DO NOT DELETE KCG storage.txt");
 
+        // Boolean flag to track if citations were successfully retrieved.
+        boolean retreived = false;
+
+        // Check if the file exists before attempting to read it.
+        if (storageFile.exists()) {
+            // Create a BufferedReader for reading the file content.
+            BufferedReader reader = new BufferedReader(new FileReader(storageFile));
+            String line;
+
+            // Read each line from the file and add it to the citation entries list.
+            while ((line = reader.readLine()) != null) {
+                sortingCode.getCitationEntries().add(line);
+                retreived = true;
+            }
+
+            // Output the sorted citations and update the UI text field.
+            sortingCode.outputCitations(sortingCode.getCitationEntries());
+            txtCitation.setText(sortingCode.getCitationOutput());
+
+            // Close the BufferedReader to release system resources.
+            reader.close();
+        } else {
+            // If the file does not exist, create a new empty file.
+            System.out.println("用于存储的文件不存在，现创建新的文件");
+            storageFile.createNewFile();
+        }
+
+        // If citations were retrieved, display a success message using an alert dialog.
         if (retreived) {
             Platform.runLater(() -> {
                 Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("Citation Retrieved");
+                alert.setTitle("参考文献已恢复");
                 alert.setHeaderText(null);
-                alert.setContentText("We retrieved the citation entries from the storage.");
-                alert.initModality(Modality.APPLICATION_MODAL); // Ensures it stays on top
+                alert.setContentText("我们恢复了您的参考文献");
+                alert.initModality(Modality.APPLICATION_MODAL); // Ensures it stays on top.
                 alert.showAndWait();
             });
         }
     }
+
 
 
     @FXML
@@ -96,8 +140,8 @@ public class MainController {
         clipboard.setContents(stringSelection, null);
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setHeaderText(null);
-        alert.setContentText("Citation Copied to Clipboard");
-        alert.setTitle("Copied to Clipboard");
+        alert.setContentText("参考文献已复制到剪贴板");
+        alert.setTitle("已复制");
         alert.showAndWait();
     }
 

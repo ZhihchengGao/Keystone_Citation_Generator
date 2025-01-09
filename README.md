@@ -9,7 +9,8 @@ Designed and developed by Richard Gao | 高靖博
 _Special Thanks: Gordon Zhang, Mr. Kyaw (Pete)_
 
 ### Current Version:
-**January 6, 2025 - v1.0rc1**
-- Adding offline storage of citation entries
-- Automatic retrieving/storing citations to non volatile storage
+**January 9, 2025 - v1.0rc2**
+- Fixed consistencies of language usage
+- Modified storage directory for distributability concerns
+- Updated annotations
 - Bugfixes

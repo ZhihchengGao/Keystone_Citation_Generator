@@ -10,11 +10,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.control.Alert;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
-import java.util.function.DoubleBinaryOperator;
 import javafx.stage.Stage;
-
-import javax.swing.plaf.basic.BasicLookAndFeel;
 
 import java.util.ArrayList;
 import javafx.scene.control.Button;
@@ -715,34 +713,34 @@ public class MainNewCitationController {
 
         try {
 
-            validateIntegerField(txtPublishYear, "Publish Year", missingFields, incorrectFields);
-            validateIntegerField(txtPublishMonth, "Publish Month", missingFields, incorrectFields);
-            validateIntegerField(txtPublishDay, "Publish Day", missingFields, incorrectFields);
-            validateStringField(txtEnterPublishedPlace, "Published Place", missingFields);
-            validateIntegerField(txtAccessedYear, "Accessed Year", missingFields, incorrectFields);
-            validateIntegerField(txtAccessedMonth, "Accessed Month", missingFields, incorrectFields);
-            validateIntegerField(txtAccessedDay, "Accessed Day", missingFields, incorrectFields);
-            validateStringField(txtEnterTitle, "Title", missingFields);
-            validateStringField(txtEnterAuthor, "Author", missingFields);
-            validateStringField(txtEnterPublisher, "Publisher", missingFields);
+            validateIntegerField(txtPublishYear, "出版/发布年份", missingFields, incorrectFields);
+            validateIntegerField(txtPublishMonth, "出版/发布月份", missingFields, incorrectFields);
+            validateIntegerField(txtPublishDay, "出版/发布日期", missingFields, incorrectFields);
+            validateStringField(txtEnterPublishedPlace, "出版/发布地点", missingFields);
+            validateIntegerField(txtAccessedYear, "访问年份", missingFields, incorrectFields);
+            validateIntegerField(txtAccessedMonth, "访问月份", missingFields, incorrectFields);
+            validateIntegerField(txtAccessedDay, "访问日期", missingFields, incorrectFields);
+            validateStringField(txtEnterTitle, "文献标题", missingFields);
+            validateStringField(txtEnterAuthor, "作者名", missingFields);
+            validateStringField(txtEnterPublisher, "出版社/发布人", missingFields);
             validateStringField(txtEnterURL, "URL", missingFields);
 
             if (areaMNJ.isVisible()) {
-                validateIntegerField(txtStartingPage, "Starting Page", missingFields, incorrectFields);
-                validateIntegerField(txtEndingPage, "Ending Page", missingFields, incorrectFields);
-                validateIntegerField(txtVolumeNumber, "Volume Number", missingFields, incorrectFields);
-                validateIntegerField(txtIssueNumber, "Issue Number", missingFields, incorrectFields);
+                validateIntegerField(txtStartingPage, "起始页吗", missingFields, incorrectFields);
+                validateIntegerField(txtEndingPage, "结束页码", missingFields, incorrectFields);
+                validateIntegerField(txtVolumeNumber, "卷号", missingFields, incorrectFields);
+                validateIntegerField(txtIssueNumber, "期号", missingFields, incorrectFields);
                 if (citation_hasOtherAuthor) {
-                    validateStringField(txtOtherAuthor, "Other Author", missingFields);
+                    validateStringField(txtOtherAuthor, "其他作者名", missingFields);
                 }
             }
 
             if (areaZ.isVisible()) {
-                validateStringField(txtInterviewee, "Interviewee Name", missingFields);
-                validateStringField(txtInterviewer, "Interviewer Name", missingFields);
-                validateIntegerField(txtInterviewDay, "Date of Interview", missingFields, incorrectFields);
-                validateIntegerField(txtInterviewMonth, "Month of Interview", missingFields, incorrectFields);
-                validateIntegerField(txtInterviewYear, "Year of Interview", missingFields, incorrectFields);
+                validateStringField(txtInterviewee, "被采访者", missingFields);
+                validateStringField(txtInterviewer, "采访者", missingFields);
+                validateIntegerField(txtInterviewDay, "采访日期", missingFields, incorrectFields);
+                validateIntegerField(txtInterviewMonth, "采访月份", missingFields, incorrectFields);
+                validateIntegerField(txtInterviewYear, "采访年份", missingFields, incorrectFields);
             }
 
             if (citation_isOnline) {
@@ -754,14 +752,14 @@ public class MainNewCitationController {
                 StringBuilder errorMessage = new StringBuilder();
 
                 if (!missingFields.isEmpty()) {
-                    errorMessage.append("The following fields are missing:\n");
+                    errorMessage.append("您的文献缺失以下信息:\n");
                     for (String field : missingFields) {
                         errorMessage.append("- ").append(field).append("\n");
                     }
                 }
 
                 if (!incorrectFields.isEmpty()) {
-                    errorMessage.append("\nThe following fields have incorrect input:\n");
+                    errorMessage.append("\n以下信息的格式不正确:\n");
                     for (String field : incorrectFields) {
                         errorMessage.append("- ").append(field).append("\n");
                     }
@@ -784,11 +782,13 @@ public class MainNewCitationController {
             
         } catch (IllegalArgumentException e) {
             Alert errorAlert = new Alert(Alert.AlertType.INFORMATION);
-            errorAlert.setTitle("Input Errors");
-            errorAlert.setHeaderText("Please correct the following errors:");
+            errorAlert.setTitle("输入信息有误");
+            errorAlert.setHeaderText("请更正以下信息：");
             errorAlert.setContentText(e.getMessage());
             errorAlert.showAndWait();
         } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
     }

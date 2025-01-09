@@ -1,34 +1,38 @@
 package com.example.kcg_intellij;
 
 import java.util.ArrayList;
-import java.util.Collections;
-
-import com.example.kcg_intellij.PinyinTranslator;
-
-import javax.print.DocFlavor.INPUT_STREAM;
 
 public class Sorting_Code {
 
     public StringBuilder citationOutput = new StringBuilder();
 
     // Private ArrayList to store citation entries
+    // This ArrayList will hold all the citation strings for sorting and retrieval.
     ArrayList<String> citationEntries;
 
     // Constructor to initialize the ArrayList
+    // The constructor is private to restrict instantiation of the class from outside.
     private Sorting_Code() {
+        // Initialize the citationEntries ArrayList.
         citationEntries = new ArrayList<>();
     }
+
+    // Static instance of the Sorting_Code class
     private static Sorting_Code sortingCode = new Sorting_Code();
 
+    // Public method to retrieve the single instance of Sorting_Code
     public static Sorting_Code getSortingCode() {
         return sortingCode;
     }
 
-    // Getter method that allows access to the ArrayList
+    // Public getter method that provides access to the sorted ArrayList of citations
     public ArrayList<String> getCitationEntries() {
+        // Return the sorted list of citation entries.
         return bubbleSortCitations(citationEntries);
     }
 
+    // Outputs a sorted list of citations by appending them to a StringBuilder.
+    // Each citation is numbered and separated by double newlines.
     public void outputCitations(ArrayList<String> citations) { 
         citationEntries = bubbleSortCitations(citations); // Sort citations
         citationOutput.setLength(0);
@@ -219,18 +223,36 @@ public class Sorting_Code {
         }
     }
 
+    /**
+     * INPUT: citations An ArrayList of citation strings to be sorted.
+     * OUTPUT: The sorted ArrayList of citation strings.
+     */
     public ArrayList<String> bubbleSortCitations(ArrayList<String> citations) {
+        // Get the number of elements in the citations list.
         int n = citations.size();
+
+        // Outer loop runs for n-1 passes over the list to ensure sorting.
         for (int i = 0; i < n - 1; i++) {
+            // Inner loop iterates through the unsorted portion of the list.
             for (int j = 0; j < n - i - 1; j++) {
-                if (PinyinTranslator.textToHanYuPinyin(citations.get(j)).compareToIgnoreCase(PinyinTranslator.textToHanYuPinyin(citations.get(j + 1))) > 0) {
-                    // Swap citations[j] and citations[j+1]
+                // Convert both citations[j] and citations[j+1] to HanYu Pinyin
+                // for lexicographical comparison.
+                if (PinyinTranslator.textToHanYuPinyin(citations.get(j))
+                        .compareToIgnoreCase(PinyinTranslator.textToHanYuPinyin(citations.get(j + 1))) > 0) {
+                    // If citations[j] is greater than citations[j+1], swap them.
+
+                    // Temporarily store citations[j] in a variable.
                     String temp = citations.get(j);
+                    // Replace citations[j] with citations[j+1].
                     citations.set(j, citations.get(j + 1));
+                    // Place the temporary value (original citations[j]) in citations[j+1].
                     citations.set(j + 1, temp);
                 }
             }
         }
+
+        // Return the sorted list of citations.
         return citations;
     }
+
 }
