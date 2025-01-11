@@ -17,7 +17,7 @@ public class Main extends Application
         mainStage = stage;
         Parent root = FXMLLoader.load(getClass().getResource("KCG_Main.fxml"));
         Scene scene = new Scene(root);
-        stage.setTitle("Keystone Citation Generator");
+        stage.setTitle("鼎石中文参考文献生成器");
         stage.setScene(scene);
 
         stage.show();

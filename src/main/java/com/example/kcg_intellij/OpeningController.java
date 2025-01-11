@@ -23,7 +23,7 @@ public class OpeningController {
             controller.setMainController(mainController);
             // Open the new citation window in a new Stage
             Stage stage = new Stage();
-            stage.setTitle("New Citation");
+            stage.setTitle("新建参考文献");
             stage.setScene(new Scene(root));
             stage.show();
         } catch (Exception e) {
@@ -41,7 +41,7 @@ public class OpeningController {
             controller.setMainController(mainController);
             // Open the new citation window in a new Stage
             Stage stage = new Stage();
-            stage.setTitle("Edit Citations");
+            stage.setTitle("编辑参考文献");
             stage.setScene(new Scene(root));
             stage.show();
         } catch (Exception e) {
