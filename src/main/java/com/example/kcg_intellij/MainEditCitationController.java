@@ -10,7 +10,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -20,6 +22,12 @@ public class MainEditCitationController implements Initializable {
 
     @FXML
     private TableColumn<TableView_Citations, String> columnCitationColumn;
+
+    @FXML
+    void handleHelp(ActionEvent event) throws URISyntaxException, IOException {
+        Desktop.getDesktop().browse(new URI("https://github.com/ZhihchengGao/Keystone_Citation_Generator/wiki/User-Guide#delete-a-citation"));
+
+    }
 
     @FXML
     private TableView<TableView_Citations> tableCitationTable;

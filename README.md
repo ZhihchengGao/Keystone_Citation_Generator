@@ -9,8 +9,7 @@ Designed and developed by Richard Gao | 高靖博
 _Special Thanks: Gordon Zhang, Mr. Kyaw (Pete)_
 
 ### Current Version:
-**January 9, 2025 - v1.0rc2**
-- Fixed consistencies of language usage
-- Modified storage directory for distributability concerns
-- Updated annotations
+**January 11, 2025 - v1.0rc3**
+- Added multiple help button
+- .app package included
 - Bugfixes

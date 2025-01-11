@@ -9,7 +9,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.Alert;
 
+import java.awt.*;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import javafx.stage.Stage;
@@ -685,6 +687,11 @@ public class MainNewCitationController {
     }
 
     @FXML
+    void handleHelp(ActionEvent event) throws URISyntaxException, IOException {
+        Desktop.getDesktop().browse(new URI("https://github.com/ZhihchengGao/Keystone_Citation_Generator/wiki/User-Guide#create-a-citation"));
+    }
+
+    @FXML
     void handleVolumeNumber(ActionEvent event) {
 
     }
@@ -741,10 +748,6 @@ public class MainNewCitationController {
                 validateIntegerField(txtInterviewDay, "采访日期", missingFields, incorrectFields);
                 validateIntegerField(txtInterviewMonth, "采访月份", missingFields, incorrectFields);
                 validateIntegerField(txtInterviewYear, "采访年份", missingFields, incorrectFields);
-            }
-
-            if (citation_isOnline) {
-                validateStringField(txtEnterURL, "URL", missingFields);
             }
 
             // If there are any errors, throw an exception

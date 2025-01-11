@@ -65,6 +65,11 @@
                                     <Font size="16.0" />
                                  </font>
                               </Button>
+                              <Button fx:id="btnConfirm1" alignment="CENTER_RIGHT" layoutX="496.0" layoutY="8.0" mnemonicParsing="false" onAction="#handleHelp" style="-fx-background-color: #FFFFFF; -fx-border-color: grey; -fx-border-radius: 10; -fx-border-width: 0.5;" text="?" textAlignment="CENTER" textFill="#727272">
+                                 <font>
+                                    <Font size="8.0" />
+                                 </font>
+                              </Button>
                            </children>
                         </AnchorPane>
                      </children>

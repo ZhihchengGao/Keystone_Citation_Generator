@@ -40,6 +40,11 @@
                   <Cursor fx:constant="MOVE" />
                </cursor>
             </Button>
+            <Button mnemonicParsing="false" onAction="#handleHelp" style="-fx-background-color: white;" text="帮助">
+               <cursor>
+                  <Cursor fx:constant="MOVE" />
+               </cursor>
+            </Button>
          </children>
          <VBox.margin>
             <Insets />
