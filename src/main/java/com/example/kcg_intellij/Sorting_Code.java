@@ -53,6 +53,7 @@ public class Sorting_Code {
         String otherAuthor = bookEntry.getOtherAuthor();
         String publishedPlace = bookEntry.getPublishedPlace();
         String publisher = bookEntry.getPublisher();
+        int publishedYear = bookEntry.getPubishedYear();
         int startingPageNumber = bookEntry.getStartingPageNumber();
         int endingPageNumber = bookEntry.getEndingPageNumber();
         String accessingDate = bookEntry.getAccessingDate();
@@ -61,21 +62,21 @@ public class Sorting_Code {
         if (bookEntry.isOnline()) { // Check if the book is online
             if (bookEntry.hasOtherAuthor()) { // Check if there's another author
                 return author + "." + title + "[M/OL]." + otherAuthor + "."
-                        + publishedPlace + ":" + publisher + "," + startingPageNumber
+                        + publishedPlace + ":" + publisher + "," + publishedYear + ":" + startingPageNumber
                         + "-" + endingPageNumber + "[" + accessingDate + "]" + "." + url + ".";
             } else {
                 return author + "." + title + "[M/OL]."
-                        + publishedPlace + ":" + publisher + "," + startingPageNumber
+                        + publishedPlace + ":" + publisher + "," + publishedYear + ":" + startingPageNumber
                         + "-" + endingPageNumber + "[" + accessingDate + "]" + "." + url + ".";
             }
         } else { // Book is offline
             if (bookEntry.hasOtherAuthor()) { // Check if there's another author
                 return author + "." + title + "[M]." + otherAuthor + "."
-                        + publishedPlace + ":" + publisher + "," + startingPageNumber
+                        + publishedPlace + ":" + publisher + ","  + publishedYear + ":" + startingPageNumber
                         + "-" + endingPageNumber + '.';
             } else {
                 return author + "." + title + "[M]."
-                        + publishedPlace + ":" + publisher + "," + startingPageNumber
+                        + publishedPlace + ":" + publisher + ","  + publishedYear + ":" + startingPageNumber
                         + "-" + endingPageNumber + '.';
             }
         }

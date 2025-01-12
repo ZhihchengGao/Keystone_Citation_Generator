@@ -25,6 +25,7 @@ public class OpeningController {
             Stage stage = new Stage();
             stage.setTitle("新建参考文献");
             stage.setScene(new Scene(root));
+            stage.setResizable(false);
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
@@ -43,6 +44,7 @@ public class OpeningController {
             Stage stage = new Stage();
             stage.setTitle("编辑参考文献");
             stage.setScene(new Scene(root));
+            stage.setResizable(false);
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();

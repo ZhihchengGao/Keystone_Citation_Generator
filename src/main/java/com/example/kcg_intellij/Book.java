@@ -64,6 +64,10 @@ public class Book {
         return endingPageNumber;
     } // Retrieve ending page number.
 
+    public int getPubishedYear() {
+        return publishedYear;
+    }
+
     public String getUrl() {
         return url;
     } // Retrieve URL for online book.

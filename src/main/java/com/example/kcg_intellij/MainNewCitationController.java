@@ -18,6 +18,8 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import javafx.scene.control.Button;
+import javafx.scene.text.Text;
+
 
 public class MainNewCitationController {
 
@@ -108,6 +110,9 @@ public class MainNewCitationController {
 
     @FXML
     private TextField txtInterviewee;
+
+    @FXML
+    private Text puretxtPublisher;
 
     @FXML
     private Button btnConfirm;
@@ -225,6 +230,8 @@ public class MainNewCitationController {
         txtAccessedDay.setDisable(true);
         txtEnterURL.setDisable(true);
 
+        puretxtPublisher.setText("发布者");
+
         checkOnline.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) { // Checkbox is selected
                 txtAccessedMonth.setDisable(false);
@@ -266,6 +273,9 @@ public class MainNewCitationController {
         txtAccessedYear.setDisable(false);
         txtAccessedDay.setDisable(false);
         txtEnterURL.setDisable(false);
+
+        puretxtPublisher.setText("发布者");
+
     }
 
     @FXML
@@ -292,6 +302,9 @@ public class MainNewCitationController {
         txtAccessedYear.setDisable(false);
         txtAccessedDay.setDisable(false);
         txtEnterURL.setDisable(false);
+
+        puretxtPublisher.setText("发布者");
+
     }
 
     @FXML
@@ -326,6 +339,8 @@ public class MainNewCitationController {
         txtOtherAuthor.setDisable(true);
         txtVolumeNumber.setDisable(false);
         txtIssueNumber.setDisable(false);
+
+        puretxtPublisher.setText("出版社");
 
         checkOnline.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) { // Checkbox is selected
@@ -396,6 +411,9 @@ public class MainNewCitationController {
         txtOtherAuthor.setDisable(true);
         txtVolumeNumber.setDisable(true);
         txtIssueNumber.setDisable(true);
+
+        puretxtPublisher.setText("出版社");
+
 
         checkOnline.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) { // Checkbox is selected
@@ -473,8 +491,9 @@ public class MainNewCitationController {
         mnubtnCitationType.setText("报纸[N]"); // Set the menu button to show selected type
 
         // Basic attributes that needs to be shown for 'NEWS' entry
-        checkOnline.setSelected(false);
+
         checkHasOtherAuthor.setSelected(false);
+        checkHasPageNumber.setSelected(false);
         checkHasOtherAuthor.setDisable(true);
         checkHasPageNumber.setDisable(false);
         checkOnline.setDisable(false);
@@ -494,6 +513,10 @@ public class MainNewCitationController {
         txtOtherAuthor.setDisable(true);
         txtVolumeNumber.setDisable(false);
         txtIssueNumber.setDisable(false);
+        checkOnline.setSelected(false);
+
+        puretxtPublisher.setText("出版社");
+
 
         // Listener to actively check if the checkbox is selected or not
         checkOnline.selectedProperty().addListener((observable, oldValue, newValue) -> {
@@ -559,6 +582,8 @@ public class MainNewCitationController {
         txtAccessedDay.setDisable(true);
         txtEnterURL.setDisable(true);
 
+        puretxtPublisher.setText("发布者");
+
         checkOnline.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) { // Checkbox is selected
                 txtAccessedMonth.setDisable(false);
@@ -602,6 +627,9 @@ public class MainNewCitationController {
         txtAccessedYear.setDisable(false);
         txtAccessedDay.setDisable(false);
         txtEnterURL.setDisable(false);
+
+        puretxtPublisher.setText("发布者");
+
     }
 
     @FXML
@@ -619,7 +647,7 @@ public class MainNewCitationController {
         checkHasPageNumber.setDisable(false);
         checkOnline.setSelected(false);
         checkOnline.setDisable(false);
-        txtEnterTitle.setDisable(true);
+        txtEnterTitle.setDisable(false);
         txtEnterAuthor.setDisable(true);
         txtEnterPublisher.setDisable(false);
         txtEnterPublishedPlace.setDisable(true);
@@ -635,6 +663,9 @@ public class MainNewCitationController {
         txtInterviewDay.setDisable(false);
         txtInterviewMonth.setDisable(false);
         txtInterviewYear.setDisable(false);
+
+        puretxtPublisher.setText("发布者");
+
 
         checkOnline.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) { // Checkbox is selected
@@ -677,6 +708,9 @@ public class MainNewCitationController {
         txtAccessedYear.setDisable(false);
         txtAccessedDay.setDisable(false);
         txtEnterURL.setDisable(false);
+
+        puretxtPublisher.setText("发布者");
+
     }
 
 

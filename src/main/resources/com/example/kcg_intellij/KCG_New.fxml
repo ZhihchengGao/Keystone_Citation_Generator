@@ -267,7 +267,7 @@
                               </HBox>
                               <HBox prefHeight="66.0" prefWidth="406.0">
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="出版社: ">
+                                    <Text fx:id="puretxtPublisher" strokeType="OUTSIDE" strokeWidth="0.0" text="出版社: ">
                                        <font>
                                           <Font size="17.0" />
                                        </font>

@@ -168,7 +168,7 @@ public class MainController {
     void handleAbout(ActionEvent event) {
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setHeaderText("鼎石中文参考文献生成器");
-        alert.setContentText("开发者: Richard Gao | 高靖博 别骂了这是我的CS IA\n当前版本：v1.0rc3 \n \n开源地址:\n github.com/ZhihchengGao/Keystone_Citation_Generator \n \n如有问题，请联系：richardgao2006@gmail.com");
+        alert.setContentText("开发者: Richard Gao | 高靖博 别骂了这是我的CS IA\n当前版本：v1.0.0 \n \n开源地址:\n github.com/ZhihchengGao/Keystone_Citation_Generator \n \n如有问题，请联系：richardgao2006@gmail.com");
         alert.setTitle("鼎石参考文献生成器");
         alert.showAndWait();
     }
