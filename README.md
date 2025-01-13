@@ -9,7 +9,5 @@ Designed and developed by Richard Gao | 高靖博
 _Special Thanks: Gordon Zhang, Mr. Kyaw (Pete)_
 
 ### Current Version:
-**January 11, 2025 - v1.0rc3**
-- Added multiple help button
-- .app package included
+**January 12, 2025 - v1.0.0**  **[Release]**
 - Bugfixes
